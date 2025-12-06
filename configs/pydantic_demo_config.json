@@ -1,0 +1,5 @@
+{
+  "input_path": "data/input_pydantic.json",
+  "output_path": "data/output_pydantic.json",
+  "batch_size": 555
+}

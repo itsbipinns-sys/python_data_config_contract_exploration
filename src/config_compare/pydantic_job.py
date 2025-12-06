@@ -1,5 +1,5 @@
 from typing import Dict
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ValidationError, Field
 from .utils.config_loader import load_json_config
 
 class JobConfigModel(BaseModel):
@@ -7,10 +7,20 @@ class JobConfigModel(BaseModel):
     output_path: str
     batch_size: int = 100
 
+class JobConfigAliasModel(BaseModel):
+    input_path: str = Field(..., alias="x")
+    output_path: str = Field(..., alias="y")
+    batch_size: int = Field(100, alias="z")
+
 def run_pydantic_job(config_path: str) -> Dict[str, str]:
     raw = load_json_config(config_path)
+    # If the input is known to have mismatched keys (e.g., x, y, z), use the alias model
+    if set(raw.keys()) >= {"x", "y", "z"}:
+        model = JobConfigAliasModel
+    else:
+        model = JobConfigModel
     try:
-        cfg = JobConfigModel(**raw)
+        cfg = model(**raw)
     except ValidationError as e:
         print("Validation failed:", e)
         raise

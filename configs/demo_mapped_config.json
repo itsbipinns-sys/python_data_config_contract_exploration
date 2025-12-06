@@ -1,0 +1,6 @@
+{
+  "read": "data/input.json",
+  "write": "data/output.json",
+  "batch": 123,
+  "extra": "ignore me"
+}

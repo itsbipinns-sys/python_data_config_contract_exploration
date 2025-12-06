@@ -1,0 +1,8 @@
+{
+  "x": "input/abc.txt",
+  "y": "output/xyz.txt",
+  "z": 42,
+  "a": 1,
+  "b": 2,
+  "c": 3
+}

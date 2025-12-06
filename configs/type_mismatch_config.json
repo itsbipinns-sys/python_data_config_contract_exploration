@@ -1,0 +1,5 @@
+{
+  "input_path": 123,
+  "output_path": true,
+  "batch_size": "not_an_int"
+}
